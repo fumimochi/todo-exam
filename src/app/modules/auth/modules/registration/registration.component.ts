@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthModels } from '../../models';
 import { RegistrationService } from './registration.service';
 
 @Component({
@@ -7,7 +8,10 @@ import { RegistrationService } from './registration.service';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss']
 })
-export class RegistrationComponent {
+export class RegistrationComponent implements OnInit{
+  public suchEmailExists: boolean = false;
+  public regCreated: boolean = false;
+  public regInfo: AuthModels.User.IUser[] = [];
 
   constructor(private readonly _registrationService: RegistrationService) { };
 
@@ -26,9 +30,24 @@ export class RegistrationComponent {
     ])
   })
 
+  ngOnInit() {
+      this._registrationService.getReg()
+        .subscribe(info => {
+          this.regInfo = info;
+        })
+  }
+
   public submitRegistration() {
-    this._registrationService.addRegistrator(this.form.value)
-      .subscribe();
+    let check = this.regInfo.find(email => email.email === this.form.get('email').value);
+    if(!check) {
+      this.suchEmailExists = false;
+      this._registrationService.addRegistrator(this.form.value)
+      this.form.reset();
+      this.regCreated = true;
+    } else {
+      this.suchEmailExists = true;
+    }
+    
   }
 
 }

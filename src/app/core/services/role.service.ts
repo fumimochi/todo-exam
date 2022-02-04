@@ -6,7 +6,7 @@ import { Injectable } from "@angular/core";
 })
 export class RoleService {
     private readonly _baseUsersApiROute = 'http://localhost:3000/users';
-
+    
     constructor(private readonly http: HttpClient) { }
 
     public getUserById(id: Number) {

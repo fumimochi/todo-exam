@@ -8,7 +8,7 @@ import { AuthService } from '../auth/auth.service';
 })
 export class PagesComponent   {
   public appTitle = 'ToDo Application';
-  
+  public id: number; 
 
   constructor(
     private readonly authService: AuthService

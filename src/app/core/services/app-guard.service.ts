@@ -29,21 +29,21 @@ export class AppGuard implements CanActivate {
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
     if (
-      state.url === `/${AppData.AppEnum.PAGES}` &&
+      state.url.startsWith(`/${AppData.AppEnum.PAGES}`) &&
       !this.authService.isAuth()
-    ) {
+    ) {      
       this._router.navigateByUrl(AppData.AppEnum.AUTH);
       return true;
     }
 
     if (
-      state.url === `/${AppData.AppEnum.AUTH}` &&
+      state.url.startsWith(`/${AppData.AppEnum.AUTH}`)  &&
       this.authService.isAuth()
     ) {
       this._router.navigate([AppData.AppEnum.PAGES]);
       return true;
     }
-
+    console.log(state.url);
     return true;
   }
 }

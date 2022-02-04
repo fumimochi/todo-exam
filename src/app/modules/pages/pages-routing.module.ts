@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
 import { AppData } from "src/app/core/routes";
+import { AppGuard } from "src/app/core/services/app-guard.service";
 import { IdCategoryComponent } from "./modules/categories/components/id-category/id-category.component";
 import { PagesComponent } from "./pages.component";
 
@@ -31,6 +32,7 @@ const routes: Routes = [
                 component: IdCategoryComponent
             }
         ],
+        canActivate: [AppGuard]
     },
     
 ]

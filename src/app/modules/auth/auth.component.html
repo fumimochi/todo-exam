@@ -9,7 +9,8 @@
       <label>Password</label>
       <input type="password" class="form-control" formControlName="password">
     </div>
-    <br>
+    <p *ngIf="authFailed" id="authFailed">Invalid email or password</p>
     <button class="btn btn-success" (click)="logIn()" [disabled]="form.invalid">Log In!</button>
+    <button type="button" class="btn btn-info"><a routerLink="/auth/registration">Registrate new one</a></button>
   </form>
 </div>

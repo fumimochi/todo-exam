@@ -13,6 +13,13 @@
       "password": "k2001",
       "role": "user",
       "id": 2
+    },
+    {
+      "email": "jabroni@gmail.com",
+      "nickname": "ggatiris",
+      "password": "ggatiris",
+      "role": "user",
+      "id": 3
     }
   ],
   "categories": [
@@ -23,13 +30,18 @@
     },
     {
       "title": "cooking",
-      "description": "short receipts about simple dishes",
+      "description": "Vlad ronaldo",
       "id": 2
     },
     {
       "title": "gaming",
       "description": "old-school video games of 90`s",
       "id": 3
+    },
+    {
+      "title": "zhebrak",
+      "description": "ronaldo",
+      "id": 4
     }
   ],
   "todos": [

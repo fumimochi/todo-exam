@@ -11,6 +11,7 @@ import { AuthModels } from './models';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent {
+  public authFailed: boolean = false;
   public isLoading: boolean;
 
   constructor(private readonly _authService: AuthService) { }
@@ -48,9 +49,7 @@ export class AuthComponent {
           console.log('SUCCESSFUL LOGGED IN!');
         },
         (error) => {
-          console.error('FAILED LOGGED IN!');
-
-          console.error(error);
+          this.authFailed = true;
         }
       );
   }
