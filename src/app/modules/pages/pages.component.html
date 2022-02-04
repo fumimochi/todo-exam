@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="header">
+    <h1>{{ appTitle }}</h1>
+    <ul class="nav navbar-nav">
+      <li class="active"><a routerLink="/pages/todos">Todos</a></li>
+      <li><a routerLink="/pages/categories">Categories Management</a></li>
+      <li><a routerLink="/pages/profile">Profile</a></li>
+      <button (click)="changeLoginStatus('logout')">LOG OUT</button>
+    </ul>
+  </div>
+  <router-outlet></router-outlet>
+</div>

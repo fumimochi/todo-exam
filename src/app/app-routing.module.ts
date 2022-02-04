@@ -1,0 +1,26 @@
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+
+import { AppData } from "./core/routes";
+import { AppGuard } from "./core/services/app-guard.service";
+
+const appRoutes: Routes = [
+    {
+        path: AppData.AppEnum.PAGES,
+        canActivate: [AppGuard],
+        loadChildren: () =>
+            import('./modules/pages/pages.module').then(n => n.PagesModule),
+    },
+    {
+        path: AppData.AppEnum.AUTH,
+        canActivate: [AppGuard],
+        loadChildren: () => 
+            import('./modules/auth/auth.module').then(m => m.AuthModule),
+    },
+];
+
+@NgModule({
+    imports: [RouterModule.forRoot(appRoutes)],
+    exports: [RouterModule],
+})
+export class AppRoutingModule {}

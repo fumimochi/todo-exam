@@ -1,0 +1,39 @@
+.form-group {
+    margin-top: 15px;
+}
+.radio-form {
+    margin-top: 20px;
+}
+button {
+    margin-top: 15px;   
+}
+p {
+    font-size: 24px;
+}
+ul {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    li {
+        list-style-type: none;
+    
+        #btn-delete {
+            margin-left: 90px;
+        }
+        #btn-change {
+            margin-left: 20px;
+        }
+        .card-body {
+            overflow: hidden;
+        }
+        .card {
+            height: 190px;
+            margin-top: 20px;
+        }
+        .btns {
+            margin-bottom: 10px;
+        }
+    }
+}
+

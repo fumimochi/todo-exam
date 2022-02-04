@@ -1,0 +1,15 @@
+<div class="col-xs-8 col-xs-offset-2">
+    <form [formGroup]='form' >
+      <div class="form-group">
+        <label >New title</label>
+        <input type="text" [(ngModel)]="currentComp.title" class="form-control" formControlName="title">
+      </div>
+      <div class="form-group">
+        <label >New description</label>
+        <input type="text" [(ngModel)]="currentComp.description" class="form-control" formControlName="description">
+      </div> 
+     <button [disabled]="form.invalid" class="btn btn-success m-2" (click)="saveChanges()">Save changes</button>
+     <button class="btn btn-secondary m-2" [routerLink]="'../'">Go back</button>
+     <h5 *ngIf="isChanged">Category was changed!</h5>
+    </form>
+<div></div>

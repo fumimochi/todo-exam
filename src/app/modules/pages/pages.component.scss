@@ -1,0 +1,38 @@
+.container {
+    padding-top: 3rem;
+    width: 800px;
+    margin: 0 auto;
+
+    h1 {
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    ul {
+        display: flex;
+        flex-direction:row;
+        margin-bottom: 30px;
+        button {
+            margin-left: 80px;
+            width: 90px;
+        }
+        li {
+            list-style-type: none;
+            margin-left: 35px;
+            font-size: 24px;
+            width: 160px;
+            border: 1px grey solid;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &:hover {
+                cursor: pointer;
+            }
+            a {
+                text-decoration: none;
+                color:dimgray !important;
+            }
+        }
+    }
+}

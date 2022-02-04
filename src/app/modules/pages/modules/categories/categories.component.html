@@ -1,0 +1,30 @@
+<div class="container">
+  <form [formGroup]="form">
+    <h3>Categories management</h3>
+    <div class="search">
+      <span>Category name:</span><input type="text" formControlName="title"/>
+    </div>
+    <div class="search">
+      <span>Category description:</span><input type="text" formControlName="description"/>
+    </div>
+    <button [disabled]="form.invalid" (click)="addCategory()">Add Category</button>
+  </form>
+  <ul *ngIf="refreshedCategories?.length; else noCategories">
+    <li *ngFor="let cat of refreshedCategories">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{ cat.title }}</h5>
+          <p class="card-text">{{ cat.description }}</p>
+        </div>
+        <div class="btns">
+          <a [routerLink]="[cat.id]" class="btn btn-primary" id="btn-change">Change</a>
+          <a (click)="deleteCategory(cat)" class="btn btn-danger" id="btn-delete">Delete</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<ng-template #noCategories>
+  <div class="noCategories">No catigories were added yet</div>
+</ng-template>
