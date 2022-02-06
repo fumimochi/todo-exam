@@ -5,7 +5,8 @@
       <li class="active"><a routerLink="/pages/todos">Todos</a></li>
       <li><a routerLink="/pages/categories">Categories Management</a></li>
       <li><a routerLink="/pages/profile">Profile</a></li>
-      <button (click)="changeLoginStatus('logout')">LOG OUT</button>
+      <li *ngIf="!isUser"><a routerLink="/pages/users">Users</a></li>
+      <button (click)="changeLoginStatus('logout')" id="logout">LOG OUT</button>
     </ul>
   </div>
   <router-outlet></router-outlet>

@@ -1,4 +1,4 @@
-<div class="col-xs-8 col-xs-offset-2">
+<div class="col-xs-8 col-xs-offset-2" *ngIf="!isUser; else user">
     <form [formGroup]='form' >
       <div class="form-group">
         <label >New title</label>
@@ -12,4 +12,16 @@
      <button class="btn btn-secondary m-2" [routerLink]="'../'">Go back</button>
      <h5 *ngIf="isChanged">Category was changed!</h5>
     </form>
-<div></div>
+</div>
+
+<ng-template #user id="user">
+  <div class="form-group">
+    <label>Title</label>
+    <p>{{currentComp.title}}</p>
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <p>{{currentComp.description}}</p>
+  </div>
+  <button class="btn btn-secondary m-2" [routerLink]="'../'">Go back</button>
+</ng-template>

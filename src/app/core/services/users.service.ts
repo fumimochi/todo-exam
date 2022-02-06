@@ -16,6 +16,14 @@ export class UsersService {
         return this._http.get<AuthModels.User.IUser[]>(this._baseApiRoute);
     }
 
+    public putUser(id: number, user: AuthModels.User.IUser) {
+      return this._http.put(`${this._baseApiRoute}/${id}`, user)
+    }
+
+    public getUserById(id: number) {
+      return this._http.get(`${this._baseApiRoute}/${id}`);
+    }
+
     public getUser(dto: Partial<AuthModels.User.IUser>): Observable<AuthModels.User.IUser> {
         let params = new HttpParams();
     

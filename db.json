@@ -5,6 +5,29 @@
       "nickname": "sirok50",
       "password": "1234",
       "role": "root-admin",
+      "todos": [
+        {
+          "title": "nothing to say",
+          "description": "wqeqweq",
+          "done": null,
+          "category": "0",
+          "id": 1
+        },
+        {
+          "title": "rang uping",
+          "description": "gain next lvl play",
+          "done": true,
+          "category": "2",
+          "id": 2
+        },
+        {
+          "title": "Morning exercise",
+          "description": "10 push ups x2",
+          "done": true,
+          "category": "1",
+          "id": 3
+        }
+      ],
       "id": 1
     },
     {
@@ -12,14 +35,31 @@
       "nickname": "kirill",
       "password": "k2001",
       "role": "user",
+      "todos": [
+        {
+          "title": "qweqwe",
+          "description": "some nonsense",
+          "done": null,
+          "category": "1",
+          "id": 1
+        }
+      ],
       "id": 2
     },
     {
       "email": "jabroni@gmail.com",
       "nickname": "ggatiris",
       "password": "ggatiris",
-      "role": "user",
+      "role": "admin",
+      "todos": [],
       "id": 3
+    },
+    {
+      "email": "ggez@gmail.com",
+      "nickname": "123",
+      "password": "1234",
+      "role": "user",
+      "id": 4
     }
   ],
   "categories": [
@@ -30,7 +70,7 @@
     },
     {
       "title": "cooking",
-      "description": "Vlad ronaldo",
+      "description": "some simple dishes receipts",
       "id": 2
     },
     {
@@ -40,24 +80,8 @@
     },
     {
       "title": "zhebrak",
-      "description": "ronaldo",
+      "description": "some random category",
       "id": 4
-    }
-  ],
-  "todos": [
-    {
-      "title": "nothing to say",
-      "description": "wqeqweq",
-      "done": "no",
-      "category": "0",
-      "id": 1
-    },
-    {
-      "title": "eqwe",
-      "description": "asda",
-      "done": null,
-      "category": "2",
-      "id": 2
     }
   ]
 }

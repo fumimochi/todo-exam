@@ -16,28 +16,27 @@
       </select>
     </div>
    <div class="radio-form">
-    <div class="radio" *ngFor="let ans of answers">
-      <label>
-        <input 
-        type="radio"
-        name="answer"
-        [value]="ans.type"
-        > {{ans.text}}
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" formControlName="done" id="defaultCheck1">
+      <label class="form-check-label" for="defaultCheck1">
+        Todo is done
       </label>
     </div>
    </div>
-   <button class="btn btn-success" (click)="addTodo()">Add todo</button>
+   <button class="btn btn-success" [disabled]="form.invalid" (click)="addTodo()">Add todo</button>
    <hr>
   </form>
   <ul *ngIf="refreshedTodos?.length; else noTodos">
     <li *ngFor="let todo of refreshedTodos">
       <div class="card" style="width: 18rem;">
         <div class="card-body">
+          <p id="category">Category: {{ categoriesNames[todo.category ]}}</p> 
           <h5 class="card-title">{{ todo.title }}</h5>
           <p class="card-text">{{ todo.description }}</p>
+          <p *ngIf="todo.done !== null; else notDone">(done)</p>
         </div>
         <div class="btns">
-          <a href="#" class="btn btn-primary" id="btn-change">Change</a>
+          <a [routerLink]="[todo.id]" class="btn btn-primary" id="btn-change">Details</a>
           <a (click)="deleteTodo(todo)" class="btn btn-danger" id="btn-delete">Delete</a>
         </div>
       </div>
@@ -47,4 +46,7 @@
 
 <ng-template #noTodos>
   <div class="noCategories">No todos were added yet</div>
+</ng-template>
+<ng-template #notDone>
+  <p>(not done)</p>
 </ng-template>

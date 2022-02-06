@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthModels } from 'src/app/modules/auth/models';
+
 import { PagesModels } from '../../models';
+import { ProfileService } from '../profile/profile.service';
 import { TodosService } from './todos.service';
 
 @Component({
@@ -9,29 +12,29 @@ import { TodosService } from './todos.service';
   styleUrls: ['./todos.component.scss']
 })
 export class TodosComponent implements OnInit {
-  public answers = [{
-    type: 'yes',
-    text: 'done'
-  }, {
-    type: 'no',
-    text: 'not done'
-  }];
+  public neededCategory: string;
   public caregories: PagesModels.Category.ICategories[] = [];
+  public currentUser: AuthModels.User.IUser;
   public categoriesNames: Array<string> = [];
   public todos: PagesModels.Todo.ITodo[] = [];
   public refreshedTodos: PagesModels.Todo.ITodo[] = [];
+  public userId: number;
 
-  constructor(private readonly _todosService: TodosService) { }
+  constructor(
+    private readonly _todosService: TodosService,
+    private readonly _profileService: ProfileService
+  ) { }
 
   public readonly form = new FormGroup({
     title: new FormControl('', Validators.required),
     description: new FormControl('', ),
-    done: new FormControl('no'),
+    done: new FormControl(),
     category: new FormControl('', Validators.required)
   });
 
   ngOnInit() {
     this.getAllCategories();
+    this.userId = this._profileService.getObjectFromToken()['id'];
     this.returnTodos();
   }
 
@@ -46,27 +49,32 @@ export class TodosComponent implements OnInit {
   }
 
   public addTodo() {
-    this._todosService.postTodo(this.form.value)
-      .subscribe(tds => {
+    this.todos.push(this.form.value)
+    this.currentUser.todos = this.todos;
+    this.currentUser.todos[this.todos.length - 1].id = this.todos.length;
+    this._todosService.putUserWithTodo(this.currentUser, this.userId)
+      .subscribe(user => {
         this.returnTodos();
         this.refreshedTodos = [...this.todos];
-        console.log(tds)
       });
       this.form.reset();
   } 
 
   public returnTodos() {
-    this._todosService.getTodos()
-      .subscribe(tds => {
-        this.todos = tds;
+    this._todosService.getUserById(this.userId)
+      .subscribe(user => { 
+        this.currentUser = user;
+        this.todos = user['todos'];
         this.refreshedTodos = [...this.todos];
       })
   }
 
   public deleteTodo(todo: PagesModels.Todo.ITodo) {
-    this._todosService.deleteTodo(todo)
+    this.todos = this.todos.filter(u => u.id !== todo.id)
+    this.currentUser.todos = this.todos;
+    this._todosService.putUserWithTodo(this.currentUser, this.userId)
       .subscribe(data => {
-        this.todos = this.todos.filter(u => u.id !== todo.id);
+        this.returnTodos();
         this.refreshedTodos = [...this.todos];
       })
   }

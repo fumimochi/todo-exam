@@ -1,0 +1,14 @@
+<div>
+    <label >Nickname => </label>
+    <span>{{currentUser.nickname}}</span>
+    <div class="form-check">
+      <h4>Select user`s role:</h4>
+      <select class="form-control" [formControl]="role">
+          <option value="admin">Admin</option>
+          <option value="user">User</option>
+      </select>
+    </div>
+      <button class="btn btn-success m-2" [disabled]="role.invalid" (click)="changeRole()">Change role</button>
+      <button class="btn btn-secondary m-2" [routerLink]="'../'">Go back</button>
+      <h4 *ngIf="isChanged">User role was changed!</h4>
+</div>

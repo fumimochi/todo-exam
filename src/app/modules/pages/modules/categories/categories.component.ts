@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { RoleService } from 'src/app/core/services/role.service';
 
 import { PagesModels } from '../../models';
 import { CategoriesService } from './categories.service';
@@ -10,12 +11,14 @@ import { CategoriesService } from './categories.service';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
+  public isUser: boolean;
   public currentCat: PagesModels.Category.ICategories;
   public allCategories: PagesModels.Category.ICategories[] = [];
   public refreshedCategories: PagesModels.Category.ICategories[] = [];
 
   constructor(
     private readonly _categoriesService: CategoriesService,
+    private readonly roleService: RoleService
     ) {  };  
 
   public readonly form = new FormGroup({
@@ -25,6 +28,7 @@ export class CategoriesComponent implements OnInit {
   
   ngOnInit() {
     this.returnCategories();
+    this.roleService.getUserRole() === 'user' ? this.isUser = true : this.isUser = false;
   }
 
   public returnCategories() {

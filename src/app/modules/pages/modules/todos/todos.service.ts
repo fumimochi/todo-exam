@@ -1,13 +1,16 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+
+import { AuthModels } from "src/app/modules/auth/models";
 import { PagesModels } from "../../models";
 
 @Injectable({
     providedIn: 'root'
 })
 export class TodosService {
+    public todo: PagesModels.Todo.ITodo;
     private readonly _baseCategoriesApiRoute = 'http://localhost:3000/categories';
-    private readonly _baseTodosApiRoute = 'http://localhost:3000/todos';
+    private readonly _baseUsersApiRoute = 'http://localhost:3000/users';
 
     constructor(private readonly http: HttpClient) { }
 
@@ -15,15 +18,12 @@ export class TodosService {
         return this.http.get<PagesModels.Category.ICategories[]>(this._baseCategoriesApiRoute);
     }
 
-    public getTodos() {
-        return this.http.get<PagesModels.Todo.ITodo[]> (this._baseTodosApiRoute);
+    public getUserById(id: number) {
+        return this.http.get<AuthModels.User.IUser> (`${this._baseUsersApiRoute}/${id}`);
     }
 
-    public postTodo(todo: PagesModels.Todo.ITodo) {
-        return this.http.post(this._baseTodosApiRoute, todo);
+    public putUserWithTodo(user: AuthModels.User.IUser, id: number) {
+        return this.http.put(`${this._baseUsersApiRoute}/${id}`,  user);
     }
 
-    public deleteTodo(todo: PagesModels.Todo.ITodo) {
-        return this.http.delete(`${this._baseTodosApiRoute}/${todo.id}`)
-    }
 }

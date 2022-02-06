@@ -4,7 +4,7 @@ export namespace PagesModels {
             id?: number,
             title: string,
             description: string,
-            done: string,
+            done: boolean,
             category: string
         }
     }
