@@ -6,10 +6,8 @@ import { ProfileService } from "src/app/modules/pages/modules/profile/profile.se
     providedIn: 'root'
 })
 export class RoleService {
-    private readonly _baseUsersApiROute = 'http://localhost:3000/users';
     
     constructor(
-        private readonly http: HttpClient,
         private readonly _profileService: ProfileService
     ) { }
 

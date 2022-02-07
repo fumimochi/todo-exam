@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 import { AuthModels } from '../../models';
 import { RegistrationService } from './registration.service';
 
@@ -47,7 +48,5 @@ export class RegistrationComponent implements OnInit{
     } else {
       this.suchEmailExists = true;
     }
-    
   }
-
 }

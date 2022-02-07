@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { isEmpty, map, Observable } from "rxjs";
+import { map, Observable } from "rxjs";
+
 import { AppData } from "src/app/core/routes";
 import { AuthModels } from "../../models";
 
@@ -8,7 +9,7 @@ import { AuthModels } from "../../models";
     providedIn: 'root'
 })
 export class RegistrationService {
-    private readonly _baseRegistrationApiRoute = 'http://localhost:3000/users'
+    private readonly _baseRegistrationApiRoute = 'http://localhost:3000/users';
 
     constructor(private readonly http: HttpClient) { }
     

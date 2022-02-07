@@ -42,8 +42,6 @@ export class AuthService {
         window.localStorage.removeItem('token');
     }
 
-    /* HELPERs */
-
     private onSuccessAuth(user: AuthModels.User.IUser) {
         const token = JSON.stringify(user);
 

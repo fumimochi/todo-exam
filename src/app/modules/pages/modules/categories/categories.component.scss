@@ -7,6 +7,9 @@ button {
     input {
         margin-left: 10px;
     }
+    #desc {
+        width: 800px; 
+    }
 }
 p {
     font-size: 24px;
@@ -35,7 +38,10 @@ ul {
         .btns {
             margin-bottom: 10px;
         }
+        
     }
 }
-
-
+#catExists {
+    color: red;
+    font-size: 36px;
+}

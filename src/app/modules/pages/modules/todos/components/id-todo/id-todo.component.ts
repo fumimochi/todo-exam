@@ -1,9 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
-import { RoleService } from "src/app/core/services/role.service";
-import { AuthModels } from "src/app/modules/auth/models";
 
+import { AuthModels } from "src/app/modules/auth/models";
 import { PagesModels } from "src/app/modules/pages/models";
 import { ProfileService } from "../../../profile/profile.service";
 import { TodosService } from "../../todos.service";

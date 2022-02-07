@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthModels } from 'src/app/modules/auth/models';
 
+import { AuthModels } from 'src/app/modules/auth/models';
 import { PagesModels } from '../../models';
 import { ProfileService } from '../profile/profile.service';
 import { TodosService } from './todos.service';
@@ -78,5 +78,4 @@ export class TodosComponent implements OnInit {
         this.refreshedTodos = [...this.todos];
       })
   }
-  
 }

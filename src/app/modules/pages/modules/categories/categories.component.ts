@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { RoleService } from 'src/app/core/services/role.service';
 
+import { RoleService } from 'src/app/core/services/role.service';
 import { PagesModels } from '../../models';
+import { ProfileService } from '../profile/profile.service';
+import { TodosService } from '../todos/todos.service';
 import { CategoriesService } from './categories.service';
 
 @Component({
@@ -11,14 +13,19 @@ import { CategoriesService } from './categories.service';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
+  public userId: number;
   public isUser: boolean;
+  public catExists: boolean = false;
+  public todos: PagesModels.Todo.ITodo[];
   public currentCat: PagesModels.Category.ICategories;
   public allCategories: PagesModels.Category.ICategories[] = [];
   public refreshedCategories: PagesModels.Category.ICategories[] = [];
 
   constructor(
     private readonly _categoriesService: CategoriesService,
-    private readonly roleService: RoleService
+    private readonly _todosService: TodosService,
+    private readonly _profileService: ProfileService,
+    private readonly _roleService: RoleService
     ) {  };  
 
   public readonly form = new FormGroup({
@@ -28,7 +35,8 @@ export class CategoriesComponent implements OnInit {
   
   ngOnInit() {
     this.returnCategories();
-    this.roleService.getUserRole() === 'user' ? this.isUser = true : this.isUser = false;
+    this.userId = this._profileService.getObjectFromToken()['id'];
+    this._roleService.getUserRole() === 'user' ? this.isUser = true : this.isUser = false;
   }
 
   public returnCategories() {
@@ -49,10 +57,24 @@ export class CategoriesComponent implements OnInit {
   }
 
   public deleteCategory(cat: PagesModels.Category.ICategories) {
-    this._categoriesService.deleteCategory(cat)
-      .subscribe(data => {
-        this.allCategories = this.allCategories.filter(u => u.id !== cat.id)
-        this.refreshedCategories = [...this.allCategories]
+    this._todosService.getUserById(this.userId)
+      .subscribe(user => {
+        this.todos = user.todos.filter(todo => +todo.category + 1 === cat.id);
+        if(this.todos.length > 0) {
+          this.catExists = true;
+        } else {
+          this.catExists = false;
+          this.delete(cat);
+        }
       })
+  
+  }
+
+  public delete(cat) {
+    this._categoriesService.deleteCategory(cat)
+        .subscribe(data => {
+          this.allCategories = this.allCategories.filter(u => u.id !== cat.id)
+          this.refreshedCategories = [...this.allCategories]
+        })
   }
 }

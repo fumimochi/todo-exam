@@ -50,5 +50,4 @@ export class IdCategoryComponent implements OnInit {
       .subscribe()
     this.isChanged = true;
   }
-  
 }

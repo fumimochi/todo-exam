@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { RoleService } from 'src/app/core/services/role.service';
 import { AuthService } from '../auth/auth.service';
 
@@ -24,5 +25,4 @@ export class PagesComponent  implements OnInit {
   public changeLoginStatus(status: string) {
     this.authService.logOut();
   }
-
 }

@@ -35,6 +35,13 @@ export class AppGuard implements CanActivate {
       this._router.navigateByUrl(AppData.AppEnum.AUTH);
       return true;
     }
+    
+    if(
+      state.url == '/' && window.localStorage.getItem('token').length > 0
+    ) {      
+      this._router.navigateByUrl(AppData.AppEnum.PAGES);
+      return true;
+    }
 
     if (
       state.url.startsWith(`/${AppData.AppEnum.AUTH}`)  &&
@@ -43,7 +50,6 @@ export class AppGuard implements CanActivate {
       this._router.navigate([AppData.AppEnum.PAGES]);
       return true;
     }
-    console.log(state.url);
     return true;
   }
 }

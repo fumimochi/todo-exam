@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+
 import { AppData } from "src/app/core/routes";
 import { AuthComponent } from "./auth.component";
 
