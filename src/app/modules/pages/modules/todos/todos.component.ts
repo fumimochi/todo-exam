@@ -16,7 +16,7 @@ export class TodosComponent implements OnInit {
   public caregories: PagesModels.Category.ICategories[] = [];
   public currentUser: AuthModels.User.IUser;
   public categoriesNames: Array<string> = [];
-  public todos: PagesModels.Todo.ITodo[] = [];
+  public todos = [];
   public refreshedTodos: PagesModels.Todo.ITodo[] = [];
   public userId: number;
 
@@ -65,7 +65,7 @@ export class TodosComponent implements OnInit {
       .subscribe(user => { 
         this.currentUser = user;
         this.todos = user['todos'];
-        this.refreshedTodos = [...this.todos];
+        this.refreshedTodos = this.todos;
       })
   }
 

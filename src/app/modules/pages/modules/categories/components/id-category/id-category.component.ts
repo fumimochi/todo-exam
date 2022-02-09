@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { take } from 'rxjs';
 
 import { RoleService } from 'src/app/core/services/role.service';
 import { PagesModels } from '../../../../models';
@@ -43,6 +44,7 @@ export class IdCategoryComponent implements OnInit {
       .subscribe(details => {
         this.currentComp = details;
       })
+    
   }
 
   public saveChanges() {

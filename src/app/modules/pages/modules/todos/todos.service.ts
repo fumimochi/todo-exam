@@ -23,7 +23,7 @@ export class TodosService {
     }
 
     public putUserWithTodo(user: AuthModels.User.IUser, id: number) {
-        return this.http.put(`${this._baseUsersApiRoute}/${id}`,  user);
+        return this.http.put(`${this._baseUsersApiRoute}/${id}`, user);
     }
 
 }

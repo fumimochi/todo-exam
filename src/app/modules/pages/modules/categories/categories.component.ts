@@ -49,7 +49,7 @@ export class CategoriesComponent implements OnInit {
   
   public addCategory() {
     this._categoriesService.addCategory(this.form.value)
-    .subscribe(x => {
+    .subscribe(data => {
       this.returnCategories();
       this.refreshedCategories = [...this.allCategories];
     });
@@ -73,7 +73,7 @@ export class CategoriesComponent implements OnInit {
   public delete(cat) {
     this._categoriesService.deleteCategory(cat)
         .subscribe(data => {
-          this.allCategories = this.allCategories.filter(u => u.id !== cat.id)
+          this.allCategories = this.allCategories.filter(data => data.id !== cat.id)
           this.refreshedCategories = [...this.allCategories]
         })
   }

@@ -51,15 +51,47 @@
       "nickname": "ggatiris",
       "password": "ggatiris",
       "role": "admin",
-      "todos": [],
+      "todos": [
+        {
+          "title": "new one",
+          "description": "no desc",
+          "done": true,
+          "category": "2",
+          "id": 1
+        },
+        {
+          "title": "qweqwe",
+          "description": "sadsad",
+          "done": null,
+          "category": "2",
+          "id": 2
+        }
+      ],
       "id": 3
     },
     {
-      "email": "ggez@gmail.com",
-      "nickname": "123",
-      "password": "1234",
+      "email": "zxc@mail.ru",
+      "nickname": "sf22",
+      "password": "sf22",
       "role": "user",
-      "id": 4
+      "id": 4,
+      "todos": [
+        {
+          "title": "sadas",
+          "description": "qwe",
+          "done": true,
+          "category": "0",
+          "id": 1
+        }
+      ]
+    },
+    {
+      "email": "town@gmail.com",
+      "nickname": "tt44",
+      "password": "tt44",
+      "role": "user",
+      "todos": [],
+      "id": 5
     }
   ],
   "categories": [
@@ -69,8 +101,8 @@
       "id": 1
     },
     {
-      "title": "cooking",
-      "description": "some simple dishes receipts",
+      "title": "qweqwe",
+      "description": "123",
       "id": 2
     },
     {

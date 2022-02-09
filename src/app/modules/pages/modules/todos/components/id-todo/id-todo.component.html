@@ -1,17 +1,17 @@
 <div class="col-xs-8 col-xs-offset-2">
     <form [formGroup]="form">
-        <h2>Todo id #{{todo.id}}</h2>
+        <h2>Todo id #{{todo?.id}}</h2>
       <div class="form-group">
         <label >New title</label>
-        <input type="text" [(ngModel)]="todo.title" class="form-control" formControlName="title">
+        <input type="text" [ngModel]="todo?.title" class="form-control" formControlName="title">
       </div>
       <div class="form-group">
         <label >New description</label>
-        <input type="text" [(ngModel)]="todo.description" class="form-control" formControlName="description">
+        <input type="text" [ngModel]="todo?.description" class="form-control" formControlName="description">
       </div> 
       <div class="form-group">
         <label >Re-choose category</label>
-        <select class="form-control" formControlName="category" [(ngModel)]="todo.category">
+        <select class="form-control" formControlName="category" [ngModel]="todo?.category">
           <option *ngFor="let cat of categoriesNames; let i = index" value="{{i}}">{{cat}}</option>
         </select>
       </div>

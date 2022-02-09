@@ -1,13 +1,14 @@
 <div class="container">
-  <div class="header">
-    <h1>{{ appTitle }}</h1>
-    <ul class="nav navbar-nav">
-      <li class="active"><a routerLink="/pages/todos">Todos</a></li>
-      <li><a routerLink="/pages/categories">Categories Management</a></li>
-      <li><a routerLink="/pages/profile">Profile</a></li>
-      <li *ngIf="!isUser"><a routerLink="/pages/users">Users</a></li>
-      <button (click)="changeLoginStatus('logout')" id="logout">LOG OUT</button>
-    </ul>
-  </div>
+  <h1>{{ appTitle }}</h1>
+  <ul class="nav nav-pills">
+    <li class="nav-item" *ngFor="let nav of navItems">
+      <a 
+        class="nav-link"
+        routerLinkActive="active" 
+        routerLink="/pages/{{nav.route}}"
+      >{{nav.title}}</a>
+    </li>
+    <button (click)="changeLoginStatus('logout')" id="logout">LOG OUT</button>
+  </ul>
   <router-outlet></router-outlet>
 </div>

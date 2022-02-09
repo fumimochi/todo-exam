@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { TokenService } from "src/app/core/services/token.service";
 
 @Injectable({
     providedIn: 'root'
@@ -6,11 +7,11 @@ import { Injectable } from "@angular/core";
 export class ProfileService {
     public token = '';
 
-    constructor() { }
+    constructor(private readonly _tokenService: TokenService) { }
 
     public getObjectFromToken() {
-        let newToken = window.localStorage.getItem('token');
+        let newToken = this._tokenService.getToken();
         this.token = JSON.parse(newToken);
         return this.token 
     }
-}
+}       

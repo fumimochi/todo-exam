@@ -1,6 +1,7 @@
 export namespace AppData {
     export enum AppEnum {
-        REGISTRATION = 'registration',
+        SIGN_IN = 'sign_in',
+        SIGN_UP = 'sign_up',
         AUTH = 'auth',
         PAGES = 'pages',
         PROFILE = 'profile',

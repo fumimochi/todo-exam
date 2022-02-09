@@ -14,7 +14,6 @@ import { TodosService } from "../../todos.service";
 export class IdTodoComponent implements OnInit {
     public caregories: PagesModels.Category.ICategories[] = [];
     public categoriesNames: Array<string> = [];
-    public currentTodo: PagesModels.Todo.ITodo;
     public isChanged: boolean = false;
     public todo: PagesModels.Todo.ITodo;
     public currentUser: AuthModels.User.IUser;
@@ -46,7 +45,7 @@ export class IdTodoComponent implements OnInit {
               this.categoriesNames.push(cat.title)
             })
           })
-    }
+    }   
 
     public onRefresh() {
         this.getAllCategories();
@@ -60,8 +59,9 @@ export class IdTodoComponent implements OnInit {
     }
 
     public saveChanges() {
+        this.currentUser.todos[+this.todoId-1] = this.form.value;
+        this.currentUser.todos[+this.todoId-1].id = +this.todoId;
         this._todosService.putUserWithTodo(this.currentUser, +this.userId).subscribe()
-        this.onRefresh();
         this.isChanged = true;
     }
 }

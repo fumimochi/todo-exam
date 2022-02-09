@@ -10,13 +10,15 @@ import { Observable } from 'rxjs';
 
 import { AppData } from '../routes';
 import { AuthService } from '../../modules/auth/auth.service';
+import { ProfileService } from 'src/app/modules/pages/modules/profile/profile.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AppGuard implements CanActivate {
   constructor(
-    private readonly authService: AuthService,
+    private readonly _authService: AuthService,
+    private readonly _profileService: ProfileService,
     private readonly _router: Router
   ) {}
 
@@ -28,27 +30,29 @@ export class AppGuard implements CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    if (
-      state.url.startsWith(`/${AppData.AppEnum.PAGES}`) &&
-      !this.authService.isAuth()
-    ) {      
-      this._router.navigateByUrl(AppData.AppEnum.AUTH);
-      return true;
-    }
-    
-    if(
-      state.url == '/' && window.localStorage.getItem('token').length > 0
-    ) {      
-      this._router.navigateByUrl(AppData.AppEnum.PAGES);
-      return true;
-    }
+   
+      if (
+        state.url.startsWith(`/${AppData.AppEnum.PAGES}`) &&
+        !this._authService.isAuth()
+      ) {
+        this._router.navigateByUrl(AppData.AppEnum.AUTH);
+        return false;
+      }
+  
+      if (
+        state.url.startsWith(`/${AppData.AppEnum.AUTH}`)  &&
+        this._authService.isAuth()
+      ) {
+        this._router.navigate([AppData.AppEnum.PAGES]);
+        return false;
+      }
 
-    if (
-      state.url.startsWith(`/${AppData.AppEnum.AUTH}`)  &&
-      this.authService.isAuth()
+    if(
+      state.url == (`/pages/${AppData.AppEnum.USERS}`) &&
+      this._profileService.getObjectFromToken()['role'] === 'user'
     ) {
-      this._router.navigate([AppData.AppEnum.PAGES]);
-      return true;
+      this._router.navigateByUrl(AppData.AppEnum.PAGES);
+      return false;
     }
     return true;
   }

@@ -3,12 +3,12 @@ import { RouterModule, Routes } from "@angular/router";
 
 import { AppData } from "./core/routes";
 import { AppGuard } from "./core/services/app-guard.service";
-import { StartComponent } from "./modules/start/start.component";
 
 const appRoutes: Routes = [
-    {   
-        path: '', 
-        component: StartComponent
+    {
+        path: '',
+        redirectTo: AppData.AppEnum.PAGES,
+        pathMatch: 'full'
     },
     {
         path: AppData.AppEnum.PAGES,
