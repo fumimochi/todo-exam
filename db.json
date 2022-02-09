@@ -89,9 +89,9 @@
       "email": "town@gmail.com",
       "nickname": "tt44",
       "password": "tt44",
+      "id": 5,
       "role": "user",
-      "todos": [],
-      "id": 5
+      "todos": []
     }
   ],
   "categories": [

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { finalize } from 'rxjs';
 import { AppData } from 'src/app/core/routes';
+import { UsersService } from 'src/app/core/services/users.service';
 import { AuthService } from '../../../auth.service';
 import { AuthModels } from '../../../models';
 
@@ -49,6 +50,7 @@ export class SignUpPageComponent implements OnInit {
     if(!check) {
       this.suchEmailExists = false;
       let registered = this.form.value;
+      registered.id = this.registeredUserInfo[this.registeredUserInfo.length-1].id + 1;
       this._authService.checkUsersExists().subscribe(exists => {
         if(exists) {
           registered.role = AppData.Roles.USER
@@ -59,6 +61,7 @@ export class SignUpPageComponent implements OnInit {
         this._authService.addRegistrator(registered)
           .subscribe(token => {
             window.localStorage.setItem('token', token);
+            this._authService.logIn(registered);
             this._authService.onSuccessAuth(registered);
           });
       })
