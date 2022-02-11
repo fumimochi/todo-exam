@@ -12,6 +12,7 @@ import { AuthModels } from "./models";
     providedIn: 'root'
 })
 export class AuthService {
+    public userFields = ['email', 'nickname', 'password', 'todos', 'id', 'role'];
     private readonly _baseRegistrationApiRoute = 'http://localhost:3000/users';
     public checkNum: number = 0;
     private _token: string = '';
@@ -23,29 +24,29 @@ export class AuthService {
         private readonly _usersService: UsersService
     ) {
         this.getToken();
+        this.checkToken();
     }
     
     public getToken() {
         this._token = this._tokenService.getToken();
     }
 
-    // public checkToken() {
-    //     let checkingToken = this._tokenService.getToken();
-    //     let parsedToken = JSON.parse(checkingToken);
-    //     this._usersService.getAllUsers()
-    //         .pipe(map(user => {
-    //             user ===  parsedToken ? this.checkNum += 1 : this.checkNum;
-    //         }))
-    //         .subscribe();
-    //     if(this.checkNum != 0) {
-    //         return true;
-    //     }
-    //     else {
-    //         this._token = '';
-    //         window.localStorage.removeItem('token');
-    //         return false;
-    //     }
-    // }
+    public checkToken() {
+        try {
+            let checkingToken = this._tokenService.getToken();
+            let parsedToken = JSON.parse(checkingToken);
+            for(let field in parsedToken) {
+                this.userFields.map(item => item == field ? this.checkNum : this.checkNum += 1)
+            }
+            if(this.checkNum > 0) {
+                this._token = '';
+                window.localStorage.removeItem('token');
+            } 
+        } catch(e) {
+            this._token = '';
+            window.localStorage.removeItem('token');
+        }
+    }
     
     public isAuth(): boolean {
         return !!this._token;

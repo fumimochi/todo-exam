@@ -33,7 +33,6 @@ export class AuthGuard implements CanActivate {
    
       if (
         state.url.startsWith(`/${AppData.AppEnum.PAGES}`) &&
-        // this._authService.checkToken()  &&
         !this._authService.isAuth() 
       ) {
         this._router.navigateByUrl(AppData.AppEnum.AUTH);

@@ -92,6 +92,14 @@
       "id": 5,
       "role": "root-admin",
       "todos": []
+    },
+    {
+      "email": "fas@mail.ru",
+      "nickname": "qweqwe",
+      "password": "123123",
+      "todos": [],
+      "id": 6,
+      "role": "user"
     }
   ],
   "categories": [
