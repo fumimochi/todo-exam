@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { map, Observable, tap } from "rxjs";
+import { map, Observable, switchMap, tap } from "rxjs";
 
 import { AppData } from "src/app/core/routes";
 import { TokenService } from "src/app/core/services/token.service";
@@ -27,21 +27,25 @@ export class AuthService {
     
     public getToken() {
         this._token = this._tokenService.getToken();
-        // let parsedToken = JSON.parse(this._token);
-        // this._usersService.getAllUsers()
-        //     .pipe(map(user => {
-        //         user ===  parsedToken ? this.checkNum += 1 : this.checkNum;
-        //     }))
-        //     .subscribe();
-        // if(this.checkNum != 0) {
-        //     return this._token;
-        // }
-        // else {
-        //     this._token = '';
-        //     window.localStorage.removeItem('token');
-        //     return false;
-        // }
     }
+
+    // public checkToken() {
+    //     let checkingToken = this._tokenService.getToken();
+    //     let parsedToken = JSON.parse(checkingToken);
+    //     this._usersService.getAllUsers()
+    //         .pipe(map(user => {
+    //             user ===  parsedToken ? this.checkNum += 1 : this.checkNum;
+    //         }))
+    //         .subscribe();
+    //     if(this.checkNum != 0) {
+    //         return true;
+    //     }
+    //     else {
+    //         this._token = '';
+    //         window.localStorage.removeItem('token');
+    //         return false;
+    //     }
+    // }
     
     public isAuth(): boolean {
         return !!this._token;
@@ -58,24 +62,29 @@ export class AuthService {
     public logOut() {
         this._token = null;
         this._router.navigateByUrl(AppData.AppEnum.AUTH);
-        window.localStorage.removeItem('token');
+        this._tokenService.removeToken()
     }
 
     public onSuccessAuth(user: AuthModels.User.IUser) {
         const token = JSON.stringify(user);
 
         this._token = token;
-        window.localStorage.setItem('token', token);
+        this._tokenService.setToken(token);
 
         this._router.navigateByUrl(AppData.AppEnum.PAGES);
     }
 
-    public checkUsersExists(): Observable<boolean> {
+    public checkUsersExists(registered: AuthModels.User.IUser) {
         return this.http.get<AuthModels.User.IUser[]>(this._baseRegistrationApiRoute)
-            .pipe(map(x => x.length > 0))
+            .pipe(map(item => {
+                item.length > 0 ? registered.role = AppData.Roles.USER : registered.role = AppData.Roles.ROOT_ADMIN;
+                return registered;
+            }),
+            switchMap(registered => this.addRegistrator(registered)))
+           
     }
 
-    public addRegistrator(reg: AuthModels.User.IUser) {
+    public addRegistrator(reg) {
         return this.http.post(this._baseRegistrationApiRoute, reg)
         .pipe(map(response => JSON.stringify(response)))
     }

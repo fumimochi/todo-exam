@@ -33,7 +33,7 @@
           <p id="category">Category: {{ categoriesNames[todo.category ]}}</p> 
           <h5 class="card-title">{{ todo.title }}</h5>
           <p class="card-text">{{ todo.description }}</p>
-          <p *ngIf="todo.done !== null; else notDone">(done)</p>
+          <p *ngIf="todo.done !== null && todo.done !== false; else notDone">(done)</p>
         </div>
         <div class="btns">
           <a [routerLink]="[todo.id]" class="btn btn-primary" id="btn-change">Details</a>

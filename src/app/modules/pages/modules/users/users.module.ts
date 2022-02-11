@@ -1,7 +1,6 @@
-import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
+import { SharedModule } from "src/app/core/modules/shared.module";
 import { IdUsersComponent } from "./components/id-users/id-users.component";
 import { UsersRoutingModule } from "./users-routing.module";
 import { UsersComponent } from "./users.component";
@@ -12,10 +11,8 @@ import { UsersComponent } from "./users.component";
         IdUsersComponent
     ],
     imports: [
-        CommonModule,
+        SharedModule,
         UsersRoutingModule,
-        ReactiveFormsModule,
-        FormsModule
     ]
 })
 export class UsersModule { }

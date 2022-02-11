@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AppData } from 'src/app/core/routes';
 
-import { RoleService } from 'src/app/core/services/role.service';
+import { AppData } from 'src/app/core/routes';
 import { AuthService } from '../auth/auth.service';
 
 @Component({

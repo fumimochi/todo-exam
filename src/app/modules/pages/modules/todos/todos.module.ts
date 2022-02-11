@@ -1,10 +1,8 @@
-import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
+import { SharedModule } from "src/app/core/modules/shared.module";
 import { IdTodoComponent } from "./components/id-todo/id-todo.component";
 import { TodosRoutingModule } from "./todos-routing.module";
-
 import { TodosComponent } from "./todos.component";
 
 @NgModule({
@@ -13,10 +11,8 @@ import { TodosComponent } from "./todos.component";
         IdTodoComponent
     ],
     imports: [
-        CommonModule,
+        SharedModule,
         TodosRoutingModule,
-        FormsModule,
-        ReactiveFormsModule
     ]
 })
 export class TodosModule { }

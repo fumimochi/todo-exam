@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
 import { AppData } from "./core/routes";
-import { AppGuard } from "./core/services/app-guard.service";
+import { AuthGuard } from "./core/guards/auth-guard.service";
 
 const appRoutes: Routes = [
     {
@@ -12,15 +12,15 @@ const appRoutes: Routes = [
     },
     {
         path: AppData.AppEnum.PAGES,
-        canActivate: [AppGuard],
+        canActivate: [AuthGuard],
         loadChildren: () =>
-            import('./modules/pages/pages.module').then(n => n.PagesModule),
+            import('./modules/pages/pages.module').then(child => child.PagesModule),
     },
     {
         path: AppData.AppEnum.AUTH,
-        canActivate: [AppGuard],
+        canActivate: [AuthGuard],
         loadChildren: () => 
-            import('./modules/auth/auth.module').then(m => m.AuthModule),
+            import('./modules/auth/auth.module').then(child => child.AuthModule),
     },
 ];
 

@@ -17,10 +17,10 @@
       </div>
       <div class="radio-form">
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" formControlName="done" id="defaultCheck1">
+          <input class="form-check-input" type="checkbox" formControlName="done" id="defaultCheck1" [checked]="todo?.done != null && todo?.done != false">
           <label class="form-check-label" for="defaultCheck1">
             Todo is done
-          </label>
+          </label>  
         </div>
        </div>   
      <button [disabled]="form.invalid" class="btn btn-success m-2" (click)="saveChanges()">Save changes</button>

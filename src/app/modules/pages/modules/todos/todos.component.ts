@@ -70,7 +70,7 @@ export class TodosComponent implements OnInit {
   }
 
   public deleteTodo(todo: PagesModels.Todo.ITodo) {
-    this.todos = this.todos.filter(u => u.id !== todo.id)
+    this.todos = this.todos.filter(todoItem => todoItem.id !== todo.id)
     this.currentUser.todos = this.todos;
     this._todosService.putUserWithTodo(this.currentUser, this.userId)
       .subscribe(data => {

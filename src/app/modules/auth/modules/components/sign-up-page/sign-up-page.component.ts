@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { finalize } from 'rxjs';
 import { AppData } from 'src/app/core/routes';
+import { TokenService } from 'src/app/core/services/token.service';
 import { UsersService } from 'src/app/core/services/users.service';
 import { AuthService } from '../../../auth.service';
 import { AuthModels } from '../../../models';
@@ -20,6 +21,7 @@ export class SignUpPageComponent implements OnInit {
 
   constructor(
     private readonly _authService: AuthService,
+    private readonly _tokenService: TokenService,
     private readonly _router: Router,
   ) { };
 
@@ -50,21 +52,15 @@ export class SignUpPageComponent implements OnInit {
     if(!check) {
       this.suchEmailExists = false;
       let registered = this.form.value;
+      registered.todos = [];
       registered.id = this.registeredUserInfo[this.registeredUserInfo.length-1].id + 1;
-      this._authService.checkUsersExists().subscribe(exists => {
-        if(exists) {
-          registered.role = AppData.Roles.USER
-        } else {
-          registered.role = AppData.Roles.ROOT_ADMIN
-        }
-        registered.todos = [];
-        this._authService.addRegistrator(registered)
-          .subscribe(token => {
-            window.localStorage.setItem('token', token);
-            this._authService.logIn(registered);
-            this._authService.onSuccessAuth(registered);
-          });
-      })
+      this._authService.checkUsersExists(registered)
+        .subscribe(token => {
+          this._tokenService.setToken(token)
+          this._authService.logIn(registered);
+          this._authService.onSuccessAuth(registered);
+        });
+        
     } else {
       this.suchEmailExists = true;
     }
