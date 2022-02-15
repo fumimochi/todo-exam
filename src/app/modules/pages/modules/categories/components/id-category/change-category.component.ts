@@ -9,7 +9,7 @@ import { CategoriesService } from '../../categories.service';
 
 @Component({
   selector: 'app-id-category',
-  templateUrl: './id-category.component.html',
+  templateUrl: './change-category.component.html',
   styles: [`
       #user label {
         font-size: 36px;
@@ -20,7 +20,7 @@ import { CategoriesService } from '../../categories.service';
       };
   `]
 })
-export class IdCategoryComponent implements OnInit {
+export class ChangeCategoryComponent implements OnInit {
   public currentComp: PagesModels.Category.ICategories;
   public isUser: boolean;
   public isChanged: boolean = false;
@@ -48,7 +48,7 @@ export class IdCategoryComponent implements OnInit {
   }
 
   public saveChanges() {
-    this._categoriesService.changeCategory(this.form.value, +this.id)
+    this._categoriesService.change(this.form.value, +this.id)
       .subscribe()
     this.isChanged = true;
   }

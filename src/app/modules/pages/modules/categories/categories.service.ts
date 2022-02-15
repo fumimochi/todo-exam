@@ -12,15 +12,15 @@ export class CategoriesService {
 
     constructor(private readonly http: HttpClient) { };
 
-    public getCategories(): Observable<PagesModels.Category.ICategories[]> {
+    public get(): Observable<PagesModels.Category.ICategories[]> {
         return this.http.get<PagesModels.Category.ICategories[]>(this._baseCategoriesApiRoute)
     }
 
-    public addCategory(cat: PagesModels.Category.ICategories) {
+    public add(cat: PagesModels.Category.ICategories) {
         return this.http.post(this._baseCategoriesApiRoute, cat)
     }   
 
-    public deleteCategory(cat: PagesModels.Category.ICategories) {
+    public delete(cat: PagesModels.Category.ICategories) {
         return this.http.delete(`${this._baseCategoriesApiRoute}/${cat.id}`)
     }
 
@@ -28,7 +28,7 @@ export class CategoriesService {
         return this.http.get<PagesModels.Category.ICategories>(`${this._baseCategoriesApiRoute}/${id}`);
     }
 
-    public changeCategory(cat: PagesModels.Category.ICategories, id: number) {
+    public change(cat: PagesModels.Category.ICategories, id: number) {
         return this.http.put(`${this._baseCategoriesApiRoute}/${id}`, cat);
     }
 }

@@ -7,7 +7,7 @@ import { UsersService } from "src/app/core/services/users.service";
 
 @Component({
     selector: 'app-id-users',
-    templateUrl: './id-users.component.html',
+    templateUrl: './manage-users.component.html',
     styles: [`
         label {
             font-size: 24px;
@@ -17,7 +17,7 @@ import { UsersService } from "src/app/core/services/users.service";
         }
     `]
 })
-export class IdUsersComponent implements OnInit{
+export class ManageUsersComponent implements OnInit{
     public isChanged: boolean;
     public currentUser: any;
     public userId: string;

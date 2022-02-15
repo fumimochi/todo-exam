@@ -1,14 +1,16 @@
 import { NgModule } from "@angular/core";
 
 import { SharedModule } from "src/app/core/modules/shared.module";
-import { IdUsersComponent } from "./components/id-users/id-users.component";
+import { DisplayUsersComponent } from "./components/display-users/display-users.component";
+import { ManageUsersComponent } from "./components/manage-users/manage-users.component";
 import { UsersRoutingModule } from "./users-routing.module";
 import { UsersComponent } from "./users.component";
 
 @NgModule({
     declarations: [
         UsersComponent,
-        IdUsersComponent
+        ManageUsersComponent,
+        DisplayUsersComponent
     ],
     imports: [
         SharedModule,

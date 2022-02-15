@@ -12,9 +12,8 @@ import { AuthModels } from "./models";
     providedIn: 'root'
 })
 export class AuthService {
-    public userFields = ['email', 'nickname', 'password', 'todos', 'id', 'role'];
+    private userFields = ['email', 'nickname', 'password', 'todos', 'id', 'role'];
     private readonly _baseRegistrationApiRoute = 'http://localhost:3000/users';
-    public checkNum: number = 0;
     private _token: string = '';
 
     constructor(
@@ -27,21 +26,21 @@ export class AuthService {
         this.checkToken();
     }
     
-    public getToken() {
-        this._token = this._tokenService.getToken();
+    private getToken() {
+        this._token = this._tokenService.return ();
     }
 
-    public checkToken() {
+    private checkToken() {
         try {
-            let checkingToken = this._tokenService.getToken();
+            let checkingToken = this._tokenService.return();
             let parsedToken = JSON.parse(checkingToken);
-            for(let field in parsedToken) {
-                this.userFields.map(item => item == field ? this.checkNum : this.checkNum += 1)
+            let keyArr = Object.keys(parsedToken);
+            for(let field of this.userFields) {
+                if(!keyArr.includes(field)) {
+                    this._token = '';
+                    window.localStorage.removeItem('token');
+                }
             }
-            if(this.checkNum > 0) {
-                this._token = '';
-                window.localStorage.removeItem('token');
-            } 
         } catch(e) {
             this._token = '';
             window.localStorage.removeItem('token');
@@ -63,14 +62,14 @@ export class AuthService {
     public logOut() {
         this._token = null;
         this._router.navigateByUrl(AppData.AppEnum.AUTH);
-        this._tokenService.removeToken()
+        this._tokenService.remove()
     }
 
     public onSuccessAuth(user: AuthModels.User.IUser) {
         const token = JSON.stringify(user);
 
         this._token = token;
-        this._tokenService.setToken(token);
+        this._tokenService.set(token);
 
         this._router.navigateByUrl(AppData.AppEnum.PAGES);
     }
@@ -85,7 +84,7 @@ export class AuthService {
            
     }
 
-    public addRegistrator(reg) {
+    private addRegistrator(reg) {
         return this.http.post(this._baseRegistrationApiRoute, reg)
         .pipe(map(response => JSON.stringify(response)))
     }

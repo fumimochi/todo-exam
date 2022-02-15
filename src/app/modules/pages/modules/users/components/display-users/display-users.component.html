@@ -1,0 +1,13 @@
+<ul>
+    <li *ngFor="let user of users">
+        <div class="card" style="width: 18rem;" *ngIf="user.id !=id">
+            <div class="card-body">
+                <h5 class="card-title">User #{{user.id}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{user.nickname}}</h6>
+                <p class="card-text">{{user.email}}</p>
+                <p class="card-link"><b>Role:</b> {{user.role}}</p>
+                <a class="btn btn-primary" [routerLink]="[user.id]" id="btn-change">Details</a>
+            </div>
+        </div>
+    </li>
+</ul>

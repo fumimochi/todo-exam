@@ -8,10 +8,10 @@ import { ProfileService } from "../../../profile/profile.service";
 import { TodosService } from "../../todos.service";
 
 @Component({
-    selector: 'app-id-todo',
-    templateUrl: './id-todo.component.html'
+    selector: 'app-change-todo',
+    templateUrl: './change-todo.component.html'
 })
-export class IdTodoComponent implements OnInit {
+export class ChangeTodoComponent implements OnInit {
     public caregories: PagesModels.Category.ICategories[] = [];
     public categoriesNames: Array<string> = [];
     public isChanged: boolean = false;

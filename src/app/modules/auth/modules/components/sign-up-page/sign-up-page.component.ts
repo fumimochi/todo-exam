@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { finalize } from 'rxjs';
-import { AppData } from 'src/app/core/routes';
 import { TokenService } from 'src/app/core/services/token.service';
-import { UsersService } from 'src/app/core/services/users.service';
 import { AuthService } from '../../../auth.service';
 import { AuthModels } from '../../../models';
 
@@ -15,9 +12,10 @@ import { AuthModels } from '../../../models';
   styleUrls: ['./sign-up-page.component.scss']
 })
 export class SignUpPageComponent implements OnInit {
-  public neededUser: AuthModels.User.IUser;
+  private neededUser: AuthModels.User.IUser;
   public suchEmailExists: boolean = false;
-  public registeredUserInfo: AuthModels.User.IUser[] = [];
+  private registeredUserInfo: AuthModels.User.IUser[] = [];
+  private registered;
 
   constructor(
     private readonly _authService: AuthService,
@@ -49,22 +47,24 @@ export class SignUpPageComponent implements OnInit {
 
   public submitRegistration() {
     let check = this.registeredUserInfo.find(user => user.email === this.form.get('email').value);
+    this.formRegisteredUser();
     if(!check) {
       this.suchEmailExists = false;
-      let registered = this.form.value;
-      registered.todos = [];
-      registered.id = this.registeredUserInfo[this.registeredUserInfo.length-1].id + 1;
-      this._authService.checkUsersExists(registered)
+      this._authService.checkUsersExists(this.registered)
         .subscribe(token => {
-          this._tokenService.setToken(token)
-          this._authService.logIn(registered);
-          this._authService.onSuccessAuth(registered);
+          this._tokenService.set(token)
+          this._authService.logIn(this.registered);
+          this._authService.onSuccessAuth(this.registered);
         });
-        
     } else {
       this.suchEmailExists = true;
     }
-    this._router.navigateByUrl(`${AppData.AppEnum.PAGES}`);
+  }
+
+  private formRegisteredUser() {
+    this.registered = this.form.value;
+    this.registered.todos = [];
+    this.registered.id = this.registeredUserInfo[this.registeredUserInfo.length-1].id + 1;
   }
 
 }
