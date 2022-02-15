@@ -13,6 +13,7 @@ import { AuthModels } from "./models";
 })
 export class AuthService {
     private userFields = ['email', 'nickname', 'password', 'todos', 'id', 'role'];
+    private registeredUserInfo: AuthModels.User.IUser[] = [];
     private readonly _baseRegistrationApiRoute = 'http://localhost:3000/users';
     private _token: string = '';
 
@@ -24,6 +25,10 @@ export class AuthService {
     ) {
         this.getToken();
         this.checkToken();
+        this.getReg()
+            .subscribe(info => {
+                this.registeredUserInfo = info;
+            })
     }
     
     private getToken() {
@@ -74,7 +79,7 @@ export class AuthService {
         this._router.navigateByUrl(AppData.AppEnum.PAGES);
     }
 
-    public checkUsersExists(registered: AuthModels.User.IUser) {
+    private checkUsersExists(registered: AuthModels.User.IUser) {
         return this.http.get<AuthModels.User.IUser[]>(this._baseRegistrationApiRoute)
             .pipe(map(item => {
                 item.length > 0 ? registered.role = AppData.Roles.USER : registered.role = AppData.Roles.ROOT_ADMIN;
@@ -82,6 +87,13 @@ export class AuthService {
             }),
             switchMap(registered => this.addRegistrator(registered)))
            
+    }
+
+    public formRegisteredUser(formValue) {
+            formValue = formValue;
+            formValue.todos = [];
+            formValue.id = this.registeredUserInfo[this.registeredUserInfo.length-1].id + 1;
+        return this.checkUsersExists(formValue)
     }
 
     private addRegistrator(reg) {

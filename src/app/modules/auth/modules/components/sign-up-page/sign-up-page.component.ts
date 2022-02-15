@@ -12,7 +12,6 @@ import { AuthModels } from '../../../models';
   styleUrls: ['./sign-up-page.component.scss']
 })
 export class SignUpPageComponent implements OnInit {
-  private neededUser: AuthModels.User.IUser;
   public suchEmailExists: boolean = false;
   private registeredUserInfo: AuthModels.User.IUser[] = [];
   private registered;
@@ -47,24 +46,17 @@ export class SignUpPageComponent implements OnInit {
 
   public submitRegistration() {
     let check = this.registeredUserInfo.find(user => user.email === this.form.get('email').value);
-    this.formRegisteredUser();
     if(!check) {
       this.suchEmailExists = false;
-      this._authService.checkUsersExists(this.registered)
+      this._authService.formRegisteredUser(this.form.value)
         .subscribe(token => {
           this._tokenService.set(token)
-          this._authService.logIn(this.registered);
-          this._authService.onSuccessAuth(this.registered);
+          this._authService.logIn(JSON.parse(token));
+          this._authService.onSuccessAuth(JSON.parse(token));
         });
     } else {
       this.suchEmailExists = true;
     }
-  }
-
-  private formRegisteredUser() {
-    this.registered = this.form.value;
-    this.registered.todos = [];
-    this.registered.id = this.registeredUserInfo[this.registeredUserInfo.length-1].id + 1;
   }
 
 }
