@@ -100,6 +100,14 @@
       "todos": [],
       "id": 6,
       "role": "user"
+    },
+    {
+      "email": "slavko.olich@gmail.com",
+      "nickname": "Vlad",
+      "password": "1234",
+      "todos": [],
+      "id": 7,
+      "role": "user"
     }
   ],
   "categories": [

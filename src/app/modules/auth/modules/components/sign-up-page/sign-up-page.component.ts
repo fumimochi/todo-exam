@@ -1,59 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 
-import { TokenService } from 'src/app/core/services/token.service';
 import { AuthService } from '../../../auth.service';
-import { AuthModels } from '../../../models';
 
 @Component({
   selector: 'app-sign-up-page',
   templateUrl: './sign-up-page.component.html',
-  styleUrls: ['./sign-up-page.component.scss']
+  styleUrls: ['./sign-up-page.component.scss'],
 })
-export class SignUpPageComponent implements OnInit {
+export class SignUpPageComponent {
   public suchEmailExists: boolean = false;
-  private registeredUserInfo: AuthModels.User.IUser[] = [];
-  private registered;
 
-  constructor(
-    private readonly _authService: AuthService,
-    private readonly _tokenService: TokenService,
-    private readonly _router: Router,
-  ) { };
+  constructor(private readonly _authService: AuthService) {}
 
   public readonly form = new FormGroup({
-    email: new FormControl(null, [
-      Validators.required,
-      Validators.email
-    ]),
+    email: new FormControl(null, [Validators.required, Validators.email]),
     nickname: new FormControl(null, [
       Validators.required,
-      Validators.minLength(3)
+      Validators.minLength(3),
     ]),
     password: new FormControl(null, [
       Validators.required,
-      Validators.minLength(4)
-    ])
-  })
-
-  ngOnInit() {
-      this._authService.getReg()
-        .subscribe(info => {
-          this.registeredUserInfo = info;
-        })
-  }
+      Validators.minLength(4),
+    ]),
+  });
 
   public submitRegistration() {
-    this._authService.formRegisteredUser(this.form.value, this.registeredUserInfo)
-      .subscribe(
-        () => {
-          console.log('SUCCESSFUL SIGNED UP!');
-        },
-        (error) => {
-          this.suchEmailExists = true;
-        }
-      );
+    this._authService.register(this.form.value).subscribe({
+      next: () => {
+        console.log('SUCCESSFUL SIGNED UP!');
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error.message);
+        this.suchEmailExists = true;
+      },
+    });
   }
-
 }

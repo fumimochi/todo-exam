@@ -1,37 +1,64 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class TokenService {
-    private userFields = ['email', 'nickname', 'password', 'todos', 'id', 'role'];
-    private token: string;
+  private readonly _key = 'token';
 
-    constructor() {
-        this.get ();
+  private _userFields = [
+    'email',
+    'nickname',
+    'password',
+    'todos',
+    'id',
+    'role',
+  ];
+  private _token: string;
+
+  constructor() {
+    this.init();
+  }
+
+  public get(): string {
+    return this._token;
+  }
+
+  public remove() {
+    window.localStorage.removeItem(this._key);
+    this._token = null;
+  }
+
+  public set(token) {
+    this._token = token;
+    window.localStorage.setItem(this._key, token);
+  }
+
+  /* PRIVATE HELPERS */
+
+  private init() {
+    const token = window.localStorage.getItem(this._key);
+
+    if (this.validate(token)) {
+      this.set(token);
+    }
+  }
+
+  private validate(token: string): boolean {
+    if (!token) {
+      return false;
     }
 
-    public get() {
-        this.token = window.localStorage.getItem('token');
-        return this.token;
+    const tokenData = JSON.parse(token);
+
+    let keyArr = Object.keys(tokenData);
+
+    for (let field of this._userFields) {
+      if (!keyArr.includes(field)) {
+        return false;
+      }
     }
 
-    public remove() {
-        window.localStorage.removeItem('token');
-    }
-    
-    public set(token) {
-        window.localStorage.setItem('token', token);
-    }
-
-    public checkToken() {
-        let checkingToken = this.get();
-        checkingToken = JSON.parse(checkingToken);
-        let keyArr = Object.keys(checkingToken);
-        for(let field of this.userFields) {
-            if(!keyArr.includes(field)) {
-                throw new Error();
-            }
-        }
-    }
+    return true;
+  }
 }

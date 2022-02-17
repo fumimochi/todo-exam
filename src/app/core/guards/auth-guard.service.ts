@@ -18,7 +18,6 @@ import { ProfileService } from 'src/app/modules/pages/modules/profile/profile.se
 export class AuthGuard implements CanActivate {
   constructor(
     private readonly _authService: AuthService,
-    private readonly _profileService: ProfileService,
     private readonly _router: Router
   ) {}
 
@@ -30,22 +29,21 @@ export class AuthGuard implements CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-   
-      if (
-        state.url.startsWith(`/${AppData.AppEnum.PAGES}`) &&
-        !this._authService.isAuth() 
-      ) {
-        this._router.navigateByUrl(AppData.AppEnum.AUTH);
-        return false;
-      }
-  
-      if (
-        state.url.startsWith(`/${AppData.AppEnum.AUTH}`)  &&
-        this._authService.isAuth()
-      ) {
-        this._router.navigate([AppData.AppEnum.PAGES]);
-        return false;
-      }
+    if (
+      state.url.startsWith(`/${AppData.AppEnum.PAGES}`) &&
+      !this._authService.isAuth
+    ) {
+      this._router.navigateByUrl(AppData.AppEnum.AUTH);
+      return false;
+    }
+
+    if (
+      state.url.startsWith(`/${AppData.AppEnum.AUTH}`) &&
+      this._authService.isAuth
+    ) {
+      this._router.navigate([AppData.AppEnum.PAGES]);
+      return false;
+    }
     return true;
   }
 }

@@ -30,9 +30,7 @@ export class RoleGuard implements CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    if(
-      this._profileService.getObjectFromToken()['role'] === 'user'
-    ) {
+    if (this._profileService.get()['role'] === 'user') {
       this._router.navigateByUrl(AppData.AppEnum.PAGES);
       return false;
     }
