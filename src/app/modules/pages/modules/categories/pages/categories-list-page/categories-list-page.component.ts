@@ -9,10 +9,10 @@ import { CategoriesService } from "../../categories.service";
 
 @Component({
     selector: 'app-sign-in-page',
-    templateUrl: './show-category.component.html',
-    styleUrls: ['./show-category.component.scss']
+    templateUrl: './categories-list-page.component.html',
+    styleUrls: ['./categories-list-page.component.scss']
 })
-export class ShowCategoryComponent implements OnInit{
+export class CategoriesListComponent implements OnInit{
     public userId: number;
     public isUser: boolean;
     public catExists: boolean = false;

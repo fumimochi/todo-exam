@@ -9,9 +9,9 @@ import { TodosService } from "../../todos.service";
 
 @Component({
     selector: 'app-change-todo',
-    templateUrl: './change-todo.component.html'
+    templateUrl: './todo-details-page.component.html'
 })
-export class ChangeTodoComponent implements OnInit {
+export class TodoDetailsComponent implements OnInit {
     public caregories: PagesModels.Category.ICategories[] = [];
     public categoriesNames: Array<string> = [];
     public isChanged: boolean = false;

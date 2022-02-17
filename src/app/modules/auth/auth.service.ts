@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { map, Observable, switchMap, tap } from "rxjs";
+import { catchError, map, Observable, of, switchMap, tap, throwError } from "rxjs";
 
 import { AppData } from "src/app/core/routes";
 import { TokenService } from "src/app/core/services/token.service";
@@ -12,7 +12,6 @@ import { AuthModels } from "./models";
     providedIn: 'root'
 })
 export class AuthService {
-    private userFields = ['email', 'nickname', 'password', 'todos', 'id', 'role'];
     private registeredUserInfo: AuthModels.User.IUser[] = [];
     private readonly _baseRegistrationApiRoute = 'http://localhost:3000/users';
     private _token: string = '';
@@ -24,7 +23,14 @@ export class AuthService {
         private readonly _usersService: UsersService
     ) {
         this.getToken();
-        this.checkToken();
+
+        try {
+            this._tokenService.checkToken();
+        } catch(e) {
+            this._token = '';
+            this._tokenService.remove();
+        }
+
         this.getReg()
             .subscribe(info => {
                 this.registeredUserInfo = info;
@@ -32,24 +38,7 @@ export class AuthService {
     }
     
     private getToken() {
-        this._token = this._tokenService.return ();
-    }
-
-    private checkToken() {
-        try {
-            let checkingToken = this._tokenService.return();
-            let parsedToken = JSON.parse(checkingToken);
-            let keyArr = Object.keys(parsedToken);
-            for(let field of this.userFields) {
-                if(!keyArr.includes(field)) {
-                    this._token = '';
-                    window.localStorage.removeItem('token');
-                }
-            }
-        } catch(e) {
-            this._token = '';
-            window.localStorage.removeItem('token');
-        }
+        this._token = this._tokenService.get();
     }
     
     public isAuth(): boolean {
@@ -57,11 +46,11 @@ export class AuthService {
     }
     
     public logIn(dto: AuthModels.User.IUser): Observable<unknown> {
-    return this._usersService.getUser(dto).pipe(
-        tap((user: AuthModels.User.IUser) => {
-        this.onSuccessAuth(user);
-        })
-    );
+        return this._usersService.getUser(dto).pipe(
+            tap((user: AuthModels.User.IUser) => {
+            this.onSuccessAuth(user);
+            })
+        );
     }
     
     public logOut() {
@@ -70,7 +59,7 @@ export class AuthService {
         this._tokenService.remove()
     }
 
-    public onSuccessAuth(user: AuthModels.User.IUser) {
+    public onSuccessAuth(user: AuthModels.User.IUser) { 
         const token = JSON.stringify(user);
 
         this._token = token;
@@ -85,15 +74,24 @@ export class AuthService {
                 item.length > 0 ? registered.role = AppData.Roles.USER : registered.role = AppData.Roles.ROOT_ADMIN;
                 return registered;
             }),
-            switchMap(registered => this.addRegistrator(registered)))
-           
+            switchMap(registered => this.addRegistrator(registered)),
+            tap(token => {
+                this._tokenService.set(token);
+                this.logIn(JSON.parse(token));
+                this.onSuccessAuth(JSON.parse(token));
+            }))
     }
 
-    public formRegisteredUser(formValue) {
-            formValue = formValue;
+    public formRegisteredUser(formValue, registeredUserInfo) {
+        let check = registeredUserInfo.find(user => user.email === formValue['email']);
+        if(!check) {
             formValue.todos = [];
             formValue.id = this.registeredUserInfo[this.registeredUserInfo.length-1].id + 1;
-        return this.checkUsersExists(formValue)
+            return this.checkUsersExists(formValue)
+        } else {
+            return throwError(() => new Error('Provided email already exists!'));
+        }
+            
     }
 
     private addRegistrator(reg) {

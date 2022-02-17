@@ -17,4 +17,10 @@ export namespace PagesModels {
         }
     }
 
+    export const EntityDetailsRoutes: Object = {
+        todo: 'todo_details',
+        users: 'users_details',
+        categories: 'categories_details'
+    }
+
 }

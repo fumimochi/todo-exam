@@ -7,10 +7,10 @@ import { TodosService } from "../../todos.service";
 
 @Component({
     selector: 'app-display-todo',
-    templateUrl: './display-todo.component.html',
-    styleUrls: ['./display-todo.component.scss']
+    templateUrl: './todo-list-page.component.html',
+    styleUrls: ['./todo-list-page.component.scss']
 })
-export class DisplayTodoComponent implements OnInit{ 
+export class TodoListComponent implements OnInit{ 
     public neededCategory: string;
     public caregories: PagesModels.Category.ICategories[] = [];
     public currentUser: AuthModels.User.IUser;

@@ -1,10 +1,10 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { AppData } from "src/app/core/routes";
-import { DisplayUsersComponent } from "./components/display-users/display-users.component";
 
-import { ManageUsersComponent } from "./components/manage-users/manage-users.component";
+import { UsersListComponent } from "./pages/users-list-page/users-list-page.component";
+import { UsersDetailsComponent } from "./pages/users-details-page/users-details-page.component";
 import { UsersComponent } from "./users.component";
+import { PagesModels } from "../../models";
 
 const routes: Routes = [
     {
@@ -12,15 +12,15 @@ const routes: Routes = [
         component: UsersComponent,
         children: [
             {
-                path: '', redirectTo: AppData.AppEnum.DISPLAY_USERS, pathMatch: 'full'
+                path: '', redirectTo: PagesModels.EntityDetailsRoutes['users'], pathMatch: 'full'
             },
             {
-                path: `${AppData.AppEnum.DISPLAY_USERS}/:id`,
-                component: ManageUsersComponent
+                path: PagesModels.EntityDetailsRoutes['users'],
+                component: UsersListComponent
             },
             {
-                path: AppData.AppEnum.DISPLAY_USERS,
-                component: DisplayUsersComponent
+                path: `${PagesModels.EntityDetailsRoutes['users']}/:id`,
+                component: UsersDetailsComponent
             }
         ]
     }

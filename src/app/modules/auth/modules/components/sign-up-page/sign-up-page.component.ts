@@ -45,18 +45,15 @@ export class SignUpPageComponent implements OnInit {
   }
 
   public submitRegistration() {
-    let check = this.registeredUserInfo.find(user => user.email === this.form.get('email').value);
-    if(!check) {
-      this.suchEmailExists = false;
-      this._authService.formRegisteredUser(this.form.value)
-        .subscribe(token => {
-          this._tokenService.set(token)
-          this._authService.logIn(JSON.parse(token));
-          this._authService.onSuccessAuth(JSON.parse(token));
-        });
-    } else {
-      this.suchEmailExists = true;
-    }
+    this._authService.formRegisteredUser(this.form.value, this.registeredUserInfo)
+      .subscribe(
+        () => {
+          console.log('SUCCESSFUL SIGNED UP!');
+        },
+        (error) => {
+          this.suchEmailExists = true;
+        }
+      );
   }
 
 }

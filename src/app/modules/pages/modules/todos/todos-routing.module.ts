@@ -1,8 +1,9 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AppData } from "src/app/core/routes";
-import { ChangeTodoComponent } from "./components/change-todo/change-todo.component";
-import { DisplayTodoComponent } from "./components/display-todo/display-todo.component";
+import { PagesModels } from "../../models";
+import { TodoDetailsComponent } from "./pages/todo-details-page/todo-details-page.component";
+import { TodoListComponent } from "./pages/todo-list-page/todo-list-page.component";
 
 import { TodosComponent } from "./todos.component";
 
@@ -12,15 +13,15 @@ const routes: Routes = [
         component: TodosComponent,
         children: [
             {
-                path: '', redirectTo: AppData.AppEnum.DISPLAY_TODO, pathMatch: 'full'
+                path: '', redirectTo: PagesModels.EntityDetailsRoutes['todo'], pathMatch: 'full'
             },
             {
-                path: `${AppData.AppEnum.DISPLAY_TODO}/:id`,
-                component: ChangeTodoComponent
+                path: PagesModels.EntityDetailsRoutes['todo'],
+                component: TodoListComponent
             },
             {
-                path: AppData.AppEnum.DISPLAY_TODO,
-                component: DisplayTodoComponent
+                path: `${PagesModels.EntityDetailsRoutes['todo']}/:id`,
+                component: TodoDetailsComponent
             }
         ]
     }

@@ -10,7 +10,7 @@ export class ProfileService {
     constructor(private readonly _tokenService: TokenService) { }
 
     public getObjectFromToken() {
-        let newToken = this._tokenService.return ();
+        let newToken = this._tokenService.get ();
         this.token = JSON.parse(newToken);
         return this.token 
     }

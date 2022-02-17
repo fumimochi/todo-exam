@@ -3,14 +3,14 @@ import { NgModule } from "@angular/core";
 import { SharedModule } from "src/app/core/modules/shared.module";
 import { CategoriesRoutingModule } from "./categories-routing.module";
 import { CategoriesComponent } from "./categories.component";
-import { ChangeCategoryComponent } from "./components/id-category/change-category.component";
-import { ShowCategoryComponent } from "./components/show-category/show-category.component";
+import { CategoryDetailsComponent } from "./pages/categories-details-page/categories-details-page.component";
+import { CategoriesListComponent } from "./pages/categories-list-page/categories-list-page.component";
 
 @NgModule({
     declarations: [
         CategoriesComponent,
-        ChangeCategoryComponent, 
-        ShowCategoryComponent
+        CategoryDetailsComponent, 
+        CategoriesListComponent
     ],
     imports: [
         SharedModule, 

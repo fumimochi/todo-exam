@@ -6,12 +6,9 @@ export namespace AppData {
         PAGES = 'pages',
         PROFILE = 'profile',
         TODOS = 'todos',
-        DISPLAY_TODO = 'todo_display',
         CATEGORIES = 'categories',
-        WATCH_CAT = 'categories_watch',
         USERS = 'users',
-        DISPLAY_USERS = 'users_display'
-    }
+    }   
 
     export enum Roles {
         ROOT_ADMIN = 'root-admin',

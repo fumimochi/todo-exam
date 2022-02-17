@@ -6,10 +6,10 @@ import { ProfileService } from "../../../profile/profile.service";
 
 @Component({
     selector: 'app-display-todo',
-    templateUrl: './display-users.component.html',
-    styleUrls: ['./display-users.component.scss']
+    templateUrl: './users-list-page.component.html',
+    styleUrls: ['./users-list-page.component.scss']
 })
-export class DisplayUsersComponent implements OnInit{
+export class UsersListComponent implements OnInit{
     public users: AuthModels.User.IUser[] = [];
     public id: number;
 

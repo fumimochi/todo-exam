@@ -7,21 +7,15 @@ import { UsersService } from "src/app/core/services/users.service";
 
 @Component({
     selector: 'app-id-users',
-    templateUrl: './manage-users.component.html',
-    styles: [`
-        label {
-            font-size: 24px;
-        };
-        .form-check {
-            margin-top: 10px;
-        }
-    `]
+    templateUrl: './users-details-page.component.html',
+    styleUrls: ['./users-details-page.component.scss']
 })
-export class ManageUsersComponent implements OnInit{
+export class UsersDetailsComponent implements OnInit{
     public isChanged: boolean;
     public currentUser: any;
     public userId: string;
     public role = new FormControl('', [Validators.required]);
+    public todos = [];
 
     constructor(
         private readonly _activateRoute: ActivatedRoute,
@@ -30,6 +24,7 @@ export class ManageUsersComponent implements OnInit{
 
     ngOnInit() {
         this.userId = this._activateRoute.snapshot.paramMap.get('id');
+        this.returnTodos();
         this._userService.getUserById(+this.userId)
             .subscribe(user => {
                 this.currentUser = user;
@@ -40,5 +35,12 @@ export class ManageUsersComponent implements OnInit{
         this.currentUser['role'] = this.role.value;
         this._userService.putUser(+this.userId, this.currentUser).subscribe();
         this.isChanged = true;
+    }
+
+    public returnTodos() {
+        this._userService.getUserById(+this.userId)
+            .subscribe(user => {
+                this.todos = user['todos'];
+            })
     }
 }

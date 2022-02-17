@@ -1,16 +1,15 @@
 import { NgModule } from "@angular/core";
 
 import { SharedModule } from "src/app/core/modules/shared.module";
-import { DisplayUsersComponent } from "./components/display-users/display-users.component";
-import { ManageUsersComponent } from "./components/manage-users/manage-users.component";
-import { UsersRoutingModule } from "./users-routing.module";
+import { UsersListComponent } from "./pages/users-list-page/users-list-page.component";
+import { UsersDetailsComponent } from "./pages/users-details-page/users-details-page.component";import { UsersRoutingModule } from "./users-routing.module";
 import { UsersComponent } from "./users.component";
 
 @NgModule({
     declarations: [
         UsersComponent,
-        ManageUsersComponent,
-        DisplayUsersComponent
+        UsersDetailsComponent,
+        UsersListComponent
     ],
     imports: [
         SharedModule,

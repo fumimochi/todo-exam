@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { take } from 'rxjs';
 
 import { RoleService } from 'src/app/core/services/role.service';
-import { PagesModels } from '../../../../models';
+import { PagesModels } from 'src/app/modules/pages/models';
 import { CategoriesService } from '../../categories.service';
 
 @Component({
   selector: 'app-id-category',
-  templateUrl: './change-category.component.html',
+  templateUrl: './categories-details-page.component.html',
   styles: [`
       #user label {
         font-size: 36px;
@@ -20,7 +19,7 @@ import { CategoriesService } from '../../categories.service';
       };
   `]
 })
-export class ChangeCategoryComponent implements OnInit {
+export class CategoryDetailsComponent implements OnInit {
   public currentComp: PagesModels.Category.ICategories;
   public isUser: boolean;
   public isChanged: boolean = false;

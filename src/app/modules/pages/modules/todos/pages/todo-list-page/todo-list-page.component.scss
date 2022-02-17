@@ -11,10 +11,10 @@ p {
     font-size: 24px;
 }
 ul {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-
+    display: grid;
+    grid-template-columns: 290px 290px 290px;
+    grid-column-gap: 70px;
+    grid-row-gap: 1em;
     li {
         list-style-type: none;
     

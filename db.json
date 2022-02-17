@@ -40,7 +40,7 @@
           "title": "qweqwe",
           "description": "some nonsense",
           "category": "1",
-          "done": false,
+          "done": true,
           "id": 1
         }
       ],
@@ -95,7 +95,7 @@
     },
     {
       "email": "das@mail.ru",
-      "nickname": "asdsadsad",
+      "nickname": "asdasdasd",
       "password": "123123",
       "todos": [],
       "id": 6,

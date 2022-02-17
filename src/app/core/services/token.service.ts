@@ -4,13 +4,14 @@ import { Injectable } from "@angular/core";
     providedIn: 'root'
 })
 export class TokenService {
+    private userFields = ['email', 'nickname', 'password', 'todos', 'id', 'role'];
     private token: string;
 
     constructor() {
-        this.return ();
+        this.get ();
     }
 
-    public return () {
+    public get() {
         this.token = window.localStorage.getItem('token');
         return this.token;
     }
@@ -21,5 +22,16 @@ export class TokenService {
     
     public set(token) {
         window.localStorage.setItem('token', token);
+    }
+
+    public checkToken() {
+        let checkingToken = this.get();
+        checkingToken = JSON.parse(checkingToken);
+        let keyArr = Object.keys(checkingToken);
+        for(let field of this.userFields) {
+            if(!keyArr.includes(field)) {
+                throw new Error();
+            }
+        }
     }
 }
