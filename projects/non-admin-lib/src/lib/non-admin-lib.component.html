@@ -1,0 +1,15 @@
+<div class="container">
+    <h1>{{ appTitle }}</h1>
+    <ul class="nav nav-pills">
+        <li class="nav-item" *ngFor="let nav of navItems">
+            <a 
+                class="nav-link" 
+                routerLinkActive="active text-white" 
+                routerLink="/non_admin/{{nav.route}}"
+            >
+            {{nav.title}}</a>
+        </li>
+        <button (click)="changeLoginStatus('logout')" id="logout">LOG OUT</button>
+    </ul>
+    <router-outlet></router-outlet>
+</div>

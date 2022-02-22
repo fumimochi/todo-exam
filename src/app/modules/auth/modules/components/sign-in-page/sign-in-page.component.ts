@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs';
@@ -43,13 +44,13 @@ export class SignInPageComponent {
           this.isLoading = false;
         })
       )
-      .subscribe(
-        () => {
+      .subscribe({
+        next: () => {
           console.log('SUCCESSFUL LOGGED IN!');
         },
-        (error) => {
+        error: (error: HttpErrorResponse) => {
           this.authFailed = true;
         }
-      );
+      });
   }
 }

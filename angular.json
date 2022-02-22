@@ -108,6 +108,68 @@
           }
         }
       }
+    },
+    "admin-lib": {
+      "projectType": "library",
+      "root": "projects/admin-lib",
+      "sourceRoot": "projects/admin-lib/src",
+      "prefix": "admin-lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/admin-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/admin-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/admin-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/admin-lib/src/test.ts",
+            "tsConfig": "projects/admin-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/admin-lib/karma.conf.js"
+          }
+        }
+      }
+    },
+    "non-admin-lib": {
+      "projectType": "library",
+      "root": "projects/non-admin-lib",
+      "sourceRoot": "projects/non-admin-lib/src",
+      "prefix": "non-admin-lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/non-admin-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/non-admin-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/non-admin-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/non-admin-lib/src/test.ts",
+            "tsConfig": "projects/non-admin-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/non-admin-lib/karma.conf.js"
+          }
+        }
+      }
     }
   },
   "defaultProject": "todo-exam"

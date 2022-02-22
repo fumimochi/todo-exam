@@ -2,6 +2,16 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "admin-lib": [
+        "dist/admin-lib/admin-lib",
+        "dist/admin-lib"
+      ],
+      "non-admin-lib": [
+        "dist/non-admin-lib/non-admin-lib",
+        "dist/non-admin-lib"
+      ]
+    },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

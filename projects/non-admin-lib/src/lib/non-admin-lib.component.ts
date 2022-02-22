@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AppData } from 'src/app/core/routes';
-import { AuthService } from '../auth/auth.service';
-import { PagesModels } from './models';
+import { AuthService } from 'src/app/modules/auth/auth.service';
+import { PagesModels } from 'src/app/modules/pages/models';
 
 @Component({
-  selector: 'app-pages',
-  templateUrl: './pages.component.html',
-  styleUrls: ['./pages.component.scss']
+  selector: 'non-admin-lib-non-admin-lib',
+  templateUrl: './non-admin-lib.component.html',
+  styleUrls: ['../../../../src/app/modules/pages/pages.component.scss']
 })
-export class PagesComponent  implements OnInit{
+export class NonAdminLibComponent implements OnInit {
   public appTitle = 'ToDo Application';
   public navItems: Array<PagesModels.INav>;
 
@@ -21,8 +21,7 @@ export class PagesComponent  implements OnInit{
     this.navItems = [
       { title: 'Todos', route: AppData.AppEnum.TODOS},
       { title: 'Categories Management', route: AppData.AppEnum.CATEGORIES},
-      { title: 'Profile', route: AppData.AppEnum.PROFILE},
-      { title: 'Users', route: AppData.AppEnum.USERS}
+      { title: 'Profile', route: AppData.AppEnum.PROFILE}
     ]
   }
 

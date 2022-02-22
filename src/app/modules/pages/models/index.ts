@@ -23,4 +23,9 @@ export namespace PagesModels {
         categories: 'categories_details'
     }
 
+    export interface INav {
+        title: string, 
+        route: string
+    }
+
 }

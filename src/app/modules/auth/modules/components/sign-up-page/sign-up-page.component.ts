@@ -32,7 +32,11 @@ export class SignUpPageComponent {
         console.log('SUCCESSFUL SIGNED UP!');
       },
       error: (error: HttpErrorResponse) => {
-        console.log(error.message);
+        if(error.message === 'Provided email already exists!') {
+          console.log(error.message);
+        } else {
+          console.log('Some new error has occured')
+        }
         this.suchEmailExists = true;
       },
     });

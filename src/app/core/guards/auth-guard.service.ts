@@ -18,6 +18,7 @@ import { ProfileService } from 'src/app/modules/pages/modules/profile/profile.se
 export class AuthGuard implements CanActivate {
   constructor(
     private readonly _authService: AuthService,
+    private readonly _profileService: ProfileService,
     private readonly _router: Router
   ) {}
 
