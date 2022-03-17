@@ -1,3 +1,4 @@
+<app-list-card [items$]="items$" [cardRef]="cardRef"></app-list-card>
 <div class="container">
   <form [formGroup]="form">
     <h3>Categories management</h3>
@@ -25,7 +26,16 @@
     </li>
   </ul>
 </div>
+
 <router-outlet></router-outlet>
+
+<ng-template #cardRef let-item>
+  <div class="template">
+    <div *ngFor="let value of item">
+      <p>{{value[0] + ': ' + value[1]}}</p>
+  </div>
+  </div>
+</ng-template>
 <ng-template #noCategories>
   <div class="noCategories">No catigories were added yet</div>
 </ng-template>

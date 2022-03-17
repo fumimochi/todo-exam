@@ -1,3 +1,4 @@
+<app-list-card [items$]="items$" [cardRef]="cardRef"></app-list-card>
 <ul>
     <li *ngFor="let user of users">
         <div class="card" style="width: 18rem;" *ngIf="user.id !=id">
@@ -11,3 +12,11 @@
         </div>
     </li>
 </ul>
+
+<ng-template #cardRef let-item class="ngTemplate">
+    <div class="template">
+        <p>{{item[0][0] + ': ' + item[0][1]}}</p>
+        <p>{{item[1][0] + ': ' + item[1][1]}}</p>
+        <p>{{item[5][0] + ': ' + item[5][1]}}</p>
+    </div>
+  </ng-template>

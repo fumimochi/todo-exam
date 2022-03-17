@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>{{ appTitle }}</h1>
+  <h1>{{ appTitle }} {{ flagProduction ? '(Prod)' : '(Dev)' }}</h1>
   <ul class="nav nav-pills">
     <li class="nav-item" *ngFor="let nav of navItems">
       <a 

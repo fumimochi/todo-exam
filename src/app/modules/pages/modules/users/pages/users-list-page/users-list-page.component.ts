@@ -11,6 +11,7 @@ import { ProfileService } from '../../../profile/profile.service';
 })
 export class UsersListComponent implements OnInit {
   public users: AuthModels.User.IUser[] = [];
+  public items$: AuthModels.User.IUser[];
   public id: number;
 
   constructor(
@@ -19,8 +20,10 @@ export class UsersListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this._usersService.getAllUsers().subscribe((users) => (this.users = users));
-
+    this._usersService.getAllUsers().subscribe((users) => {
+      this.users = users;
+      this.items$ = this.users;
+    });
     this.id = this._profileService.get()['id'];
   }
 }

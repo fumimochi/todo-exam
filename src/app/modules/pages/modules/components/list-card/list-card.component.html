@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="list_ground">
+        <form>
+            <div *ngFor="let item of items$; let id = index">
+                <input 
+                    type="radio"  
+                    name="radio"
+                    value="{{id}}"
+                    (change)="placeItem($event)">
+                    {{item['title'] || item['nickname']}}
+            </div>
+        </form>
+    </div>
+    <div class="ngTemplate">
+        <ng-container *ngIf="showingCard">
+            <template 
+                class="tmp"
+                [ngTemplateOutlet]="cardRef"
+                [ngTemplateOutletContext]="{$implicit: itemInfo}"
+            ></template>
+        </ng-container>
+    </div>
+</div>

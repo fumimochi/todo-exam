@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 
 import { SharedModule } from "src/app/core/modules/shared.module";
+import { TemplateModule } from "src/app/core/modules/template.module";
 import { CategoriesRoutingModule } from "./categories-routing.module";
 import { CategoriesComponent } from "./categories.component";
 import { CategoryDetailsComponent } from "./pages/categories-details-page/categories-details-page.component";
@@ -15,6 +16,7 @@ import { CategoriesListComponent } from "./pages/categories-list-page/categories
     imports: [
         SharedModule, 
         CategoriesRoutingModule,
+        TemplateModule
     ]
 })
 export class CategoriesModule { }

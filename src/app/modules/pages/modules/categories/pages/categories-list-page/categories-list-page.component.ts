@@ -20,6 +20,8 @@ export class CategoriesListComponent implements OnInit {
   public currentCat: PagesModels.Category.ICategories;
   public allCategories: PagesModels.Category.ICategories[] = [];
   public refreshedCategories: PagesModels.Category.ICategories[] = [];
+  public items$: PagesModels.Category.ICategories[];
+
 
   constructor(
     private readonly _categoriesService: CategoriesService,
@@ -45,6 +47,7 @@ export class CategoriesListComponent implements OnInit {
     this._categoriesService.get().subscribe((ctgrs) => {
       this.allCategories = ctgrs;
       this.refreshedCategories = [...this.allCategories];
+      this.items$ = this.allCategories;
     });
   }
 

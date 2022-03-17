@@ -17,6 +17,7 @@ export class TodoListComponent implements OnInit {
   public categoriesNames: Array<string> = [];
   public todos = [];
   public refreshedTodos: PagesModels.Todo.ITodo[] = [];
+  public items$: PagesModels.Todo.ITodo[]; 
   public userId: number;
 
   constructor(
@@ -66,6 +67,7 @@ export class TodoListComponent implements OnInit {
       this.currentUser = user;
       this.todos = user['todos'];
       this.refreshedTodos = this.todos;
+      this.items$ = this.todos
     });
   }
 
