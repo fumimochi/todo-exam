@@ -1,5 +1,4 @@
 import { Component, Input, TemplateRef } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 
 import { AuthModels } from 'src/app/modules/auth/models';
 import { PagesModels } from '../../../models';
@@ -18,15 +17,5 @@ export class ListCardComponent {
   | AuthModels.User.IUser
   >;
   @Input() cardRef: TemplateRef<any>;
-  
-
-  public placeItem(event: any) {
-    this.itemInfo = this.items$.filter(i => i.id == +event.target.value + 1);
-    this.itemInfo = Object.entries(this.itemInfo[0]);
-    this.showingCard = false;
-    if(this.itemInfo) {
-      this.showingCard = true;
-    }
-  }
 
 }

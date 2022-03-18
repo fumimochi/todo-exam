@@ -1,4 +1,3 @@
-<app-list-card [items$]="items$" [cardRef]="cardRef"></app-list-card>
 <div class="col-xs-8 col-xs-offset-2">
     <form [formGroup]='form'>
         <h3>Todos Page</h3>
@@ -28,7 +27,13 @@
         <hr>
     </form>
     <ul *ngIf="refreshedTodos?.length; else noTodos">
-        <li *ngFor="let todo of refreshedTodos">
+        <app-list-card [items$]="refreshedTodos" [cardRef]="cardRef"></app-list-card>
+    </ul>
+</div>
+
+<ng-template #cardRef let-item class="ngTemplate">
+    <div class="template">
+        <li *ngFor="let todo of item">
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <p id="category">Category: {{ categoriesNames[todo.category ]}}</p>
@@ -42,17 +47,7 @@
                 </div>
             </div>
         </li>
-    </ul>
-</div>
-
-<ng-template #cardRef let-item class="ngTemplate">
-    <hr style="height:4px;border-width:0;color:gray;background-color:gray">
-    <div style="background-color:darkgrey; padding-top: 5px; font-family: Georgia, 'Times New Roman', Times, serif;">
-        <ul *ngFor="let value of item" >
-            <p>{{value[0] + ': ' + value[1]}}</p>
-        </ul>
     </div>
-    <hr style="height:4px;border-width:0;color:gray;background-color:gray">
 </ng-template>
 
 <ng-template #noTodos>

@@ -48,7 +48,9 @@ button {
     font-size: 36px;
 }
 .template {
-    background: linear-gradient(blue, 10%, pink);
+    display: flex;
+    justify-content:space-around;
+    flex-wrap: wrap;
     padding: 10px;
     margin-bottom: 15px;
     font-size: 30px;
