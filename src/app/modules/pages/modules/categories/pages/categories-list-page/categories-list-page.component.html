@@ -10,28 +10,21 @@
     <button [disabled]="form.invalid" (click)="addCategory()">Add Category</button>
   </form>
   <p *ngIf="catExists" id="catExists">You should delete todos with this category first</p>
-  <ul *ngIf="refreshedCategories?.length; else noCategories">
-    <app-list-card [items$]="refreshedCategories" [cardRef]="cardRef"></app-list-card>
-  </ul>
+  <app-list-card [items$]="refreshedCategories" [cardRef]="cardRef"></app-list-card>  
 </div>
 
 <router-outlet></router-outlet>
 <ng-template #cardRef let-item>
   <div class="template">
-    <li *ngFor="let cat of item">
       <div class="card" style="width: 18rem;">  
         <div class="card-body">
-          <h5 class="card-title">{{ cat.title }}</h5>
-          <p class="card-text">{{ cat.description }}</p>  
+          <h5 class="card-title">{{ item.title }}</h5>
+          <p class="card-text">{{ item.description }}</p>  
         </div>
         <div class="btns">
-          <a [routerLink]="[cat.id]" class="btn btn-primary" id="btn-change">Details</a>
-          <a (click)="deleteCategory(cat)" *ngIf="!isUser" class="btn btn-danger" id="btn-delete">Delete</a>
+          <a [routerLink]="[item.id]" class="btn btn-primary" id="btn-change">Details</a>
+          <a (click)="deleteCategory(item)" *ngIf="!isUser" class="btn btn-danger" id="btn-delete">Delete</a>
         </div>
       </div>
-    </li>
   </div>
-</ng-template>
-<ng-template #noCategories>
-  <div class="noCategories">No catigories were added yet</div>
 </ng-template>

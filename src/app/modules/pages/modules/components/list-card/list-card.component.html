@@ -1,11 +1,17 @@
 <div class="container">
     <div class="ngTemplate">
-        <ng-container>
-            <template 
-                class="tmp"
-                [ngTemplateOutlet]="cardRef"
-                [ngTemplateOutletContext]="{$implicit: items$}"
-            ></template>
-        </ng-container>
+        <ul  *ngIf="items$?.length; else noItem">
+            <li *ngFor="let item of items$">
+                <template 
+                    class="tmp"
+                    [ngTemplateOutlet]="cardRef"
+                    [ngTemplateOutletContext]="{$implicit: item}"
+                ></template>
+            </li>
+        </ul>
     </div>
 </div>
+
+<ng-template #noItem>
+    <div class="noItem">There is no items yet</div>
+</ng-template>
